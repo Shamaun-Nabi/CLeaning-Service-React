@@ -1,7 +1,10 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
 
 export default function Navbar({ children }) {
+  const [admin] = useAdmin();
+  const { pathname } = useLocation();
   return (
     <>
       <div className="drawer drawer-end  ">
@@ -9,6 +12,14 @@ export default function Navbar({ children }) {
         <div className="drawer-content flex flex-col  ">
           {/* Navbar */}
           <div className="w-full navbar bg-base-200">
+            {pathname.includes("dashboard") && (
+              <label
+                htmlFor="my-drawer-2"
+                className="btn btn-primary drawer-button lg:hidden"
+              >
+                Dashboard
+              </label>
+            )}
             <div className="flex-1 px-2 mx-2">CleanHome.com</div>
             <div className="flex-none hidden lg:block ">
               <ul className="menu menu-horizontal mx-4">
@@ -18,6 +29,13 @@ export default function Navbar({ children }) {
                     Home
                   </NavLink>
                 </li>
+                {admin && (
+                  <li>
+                    <NavLink className="mx-3" to="/dashboard/add-admin">
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
                 <li>
                   <NavLink className="mx-3" to="/about">
                     About

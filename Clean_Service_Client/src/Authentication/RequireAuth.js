@@ -3,7 +3,7 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import toast from "react-hot-toast";
 
 function RequireAuth() {
-  let auth = false;
+  let auth = true;
   let location = useLocation();
   if (!auth) {
     toast.error("You Have To Login First!", {
